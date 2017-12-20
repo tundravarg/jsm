@@ -1,0 +1,32 @@
+<html>
+
+<head>
+	
+	<script src="../jsm.js"></script>
+	<script src="module1.js"></script>
+	<script src="module2.js"></script>
+
+	<script>
+		window.onload = function() {
+			//test1();
+			test2();
+			test2();
+			test1();
+		}
+		function test1() {
+			var m1 = $JSM.require('org.tuman.jsm.test.module1');
+			m1.func1();
+		}
+		function test2() {
+			var m2 = $JSM.require('org.tuman.jsm.test.module2');
+			m2.func();
+		}
+	</script>
+
+</head>
+
+<body>
+asd
+</body>
+
+</html>
