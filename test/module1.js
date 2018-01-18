@@ -1,4 +1,4 @@
-$JSM.module('org.tuman.jsm.test.module1', function() {
+$JSM.module('org.tuman.jsm.test.module1', function(require, module, exports) {
 
 
 
@@ -6,16 +6,16 @@ $JSM.module('org.tuman.jsm.test.module1', function() {
 
 console.log('---- init 1');
 
-var module2 = $JSM.require('org.tuman.jsm.test.module2');
+var module2 = require('org.tuman.jsm.test.module2');
 
 
 
-this.func1 = function() {
+exports.func1 = function() {
 	console.log('---------- 1.1');
 	module2.func();
 }
 
-this.func2 = function() {
+exports.func2 = function() {
 	console.log('---------- 1.2');
 }
 

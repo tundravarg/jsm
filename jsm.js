@@ -12,21 +12,16 @@ var $JSM = null;
 
 var MODULES = {};
 
-function registerModule(id, options) {
+function registerModule(id, closure) {
 	if (!id) throw new Error('Module id is required');
-	if (!options) throw new Error('Module options is required');
+	if (!closure) throw new Error('Module closure is required');
 
-	var module = { id: id };
-	
-	var optionsType = typeof options;
-	if (optionsType == 'function') {
-		module.init = options;
-	} else if (optionsType == 'object') {
-		module.init = options.init;
-		module.content = options.content;
-	} else {
-		throw new Error('Invalid module options');
-	}
+	var module = {
+		id: id,
+		closure: closure,
+		exports: {},
+		loaded: false
+	};
 
 	MODULES[id] = module;
 }
@@ -41,24 +36,12 @@ function requireModule(id, optional) {
 		}
 	}
 
-	var content = module.content;
-	if (content) {
-		return content;
+	if (!module.loaded) {
+		module.closure.call([][0], requireModule, module, module.exports);
+		module.loaded = true;
 	}
 
-	var content = {};
-
-	var init = module.init;
-	if (init) {
-		var newContent = init.call(content);
-		if (newContent) {
-			content = newContent;
-		}
-	}
-
-	module.content = content;
-
-	return content;
+	return module.exports;
 }
 
 
