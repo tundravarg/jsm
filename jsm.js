@@ -37,7 +37,19 @@ function requireModule(id, optional) {
 	}
 
 	if (!module.loaded) {
-		module.closure.call([][0], requireModule, module, module.exports);
+
+		function Module() {}
+		Object.defineProperty(Module.prototype, 'id', {
+			get: function() { return module.id; }
+		});
+		Object.defineProperty(Module.prototype, 'exports', {
+			get: function() { return module.exports; },
+			set: function(exports) { module.exports = exports; },
+		});
+
+		var moduleProxy = new Module();
+
+		module.closure.call([][0], requireModule, moduleProxy, moduleProxy.exports);
 		module.loaded = true;
 	}
 
