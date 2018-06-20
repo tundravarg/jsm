@@ -1,3 +1,27 @@
+//---------------------------------
+// JSM - JavaScript [Simple] Module
+//---------------------------------
+// Autor: Sergei Tumanov
+//---------------------------------
+
+
+
+////---- How to use it: -----------------------------------------
+////-------------------------------------------------------------
+//$JSM.module('your.module.name', function(require, module, exports) {
+//
+//'use strict';
+//
+//const external_module = require('some.external.module');
+//
+//var symbolForExport = '';
+//exports.symbolForExport = symbolForExport;
+//
+//});
+////-------------------------------------------------------------
+
+
+
 var $JSM = null;
 
 
